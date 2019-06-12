@@ -1,4 +1,6 @@
 # arcSDE-python-scripts
 Conduct geoprocessing tasks within:
-ArcGIS ArcSDE versioned geodatabase
-Utility Geometric Network
+<ul>
+  <li>ArcGIS ArcSDE versioned geodatabase</li>
+  <li>Utility Geometric Network</li>
+</ul>
