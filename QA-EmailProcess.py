@@ -30,7 +30,7 @@ FEEDERID ='XXXXXX' AND SUBTYPECD = 4 AND SWITCHSYMBOLTYPE is NULL
 
 ###Testing step 1###
 
-myData = r'E:\Data\EROlson\test.gdb\Switch'
+myData = 
 fieldNames = ["SWITCHSYMBOLTYPE", "EQUIPMENTID"]
 feederID = [150701,150702]
 for ID in feederID:
@@ -58,7 +58,7 @@ This portion of the process has been covered/completed in the QA Test script.
 We need to report the total number of added/removed Service Points and Secondary
 Transformers per Feeder ID.
 '''
-servicePoints = r'K:\GISElec_BusinessSupport\EROlson\QATesting.gdb\ElectricDist\ServicePoint'
+servicePoints = 
 cursor = arcpy.da.SearchCursor(servicePoints,"*","FEEDERID = '150701' AND CONSTRUCTIONSTATUS=50")
 count = 0
 for row in cursor:
@@ -71,7 +71,7 @@ print ('Total added service points: ' + str(count))
 Calculate number of removed service points with active meter status.
 1)create join and preform sql query on matching joined data.
 SQL Code:
-( DRG_156.DBO.ServicePoint.FEEDERID = '154301' AND DRG_156.DBO.ServicePoint.CONSTRUCTIONSTATUS = 55 ) AND ( DRG_156.DBO.ServiceAddress.METERSTATUS = 'ACTIVE' )
+( DRG_xxx.xxx.ServicePoint.FEEDERID = '154301' AND DRG_xxx.xxx.ServicePoint.CONSTRUCTIONSTATUS = 55 ) AND ( DRG_xxx.xxx.ServiceAddress.METERSTATUS = 'ACTIVE' )
 ***Total number of rows returned provides number we need to report***
 '''
 
@@ -79,7 +79,7 @@ SQL Code:
 '''
 Need total number of added fuses.
 '''
-fuse = r'K:\GISElec_BusinessSupport\EROlson\QATesting.gdb\ElectricDist\Fuse'
+fuse = 
 cursor = arcpy.da.SearchCursor(servicePoints,"*","FEEDERID = '150701' AND CONSTRUCTIONSTATUS=50")
 count = 0
 for row in cursor:
