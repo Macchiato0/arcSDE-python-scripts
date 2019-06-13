@@ -26,7 +26,7 @@ def calculateML(feederID,dataPath):
         # Start an edit operation
         edit.startOperation()
         
-        updateCursor = arcpy.da.UpdateCursor(secOH,updateFields,SQL)
+        updateCursor = arcpy.da.UpdateCursor(dataPath,updateFields,SQL)
         for item in updateCursor:
             myLength = myDict[item[0]]
             item[1] = myLength*3.28084
