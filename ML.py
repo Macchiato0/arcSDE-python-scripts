@@ -14,7 +14,7 @@ def calculateML(feederID,dataPath):
         del searchCursor
 
         #set workspace
-        workspace = r'E:\Apps\Application Launch\Electric\Documents\GenericAsBJLahmeyerToDGSEQ011.sde'
+        workspace = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde'
         
         # Start an edit session. Must provide the worksapce.
         edit = arcpy.da.Editor(workspace)
@@ -43,5 +43,5 @@ def calculateML(feederID,dataPath):
         
 #### Function Parameters ####
 feederID = ['001901']
-secOH = r'\ELECDIST.ElectricDist\ELECDIST.SecOHElectricLineSegment'
+secOH = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde\ELECDIST.ElectricDist\ELECDIST.SecOHElectricLineSegment'
 calculateML(feederID, secOH)
