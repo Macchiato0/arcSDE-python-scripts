@@ -1,22 +1,23 @@
 '''
+Useful Links:
 https://gis.stackexchange.com/questions/230536/adding-values-from-list-to-field-in-feature-class-using-arcpy
 '''
 import arcpy
 
-arcpy.env.workspace = r'E:\Data\EROlson\test.gdb'
+arcpy.env.workspace = 
 
 #input data
-transformer = 'Transformer'
+transformer = 
 
-priOH = 'test_OH_pri'
+priOH = 
 
-priUG = 'PriUG'
+priUG = 
 
-misc = 'MiscNetFeat'
+misc = 
 
-fuse = 'Fuse'
+fuse = 
 
-isolator = 'Transformer'
+isolator = 
 
 dataList = [transformer, priOH, priUG, misc, fuse]
 fields = ["FEEDERID"]
