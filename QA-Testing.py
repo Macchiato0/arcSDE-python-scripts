@@ -26,27 +26,27 @@ arcpy.env.overwriteOutput = True
 arcpy.env.addOutputsToMap = False
 
 #assign workspace
-arcpy.env.workspace = r'E:\Data\EROlson\test.gdb'
+arcpy.env.workspace = 
 
 ###input data paths###
 
 #Primary Overhead dataset
-priOH = r'E:\Data\EROlson\test.gdb\test_OH_pri'
+priOH = 
 
 #Primary Underground dataset
-priUG = r'E:\Data\EROlson\test.gdb\priUG'
+priUG = 
 
 #Secondary Overhead dataset
-secOH = r'E:\Data\EROlson\test.gdb\SecOH'
+secOH = 
 
 #Secondary Underground dataset
-secUG = r'E:\Data\EROlson\test.gdb\SecUG'
+secUG = 
 
 #Misc. Network Features dataset
-miscNetFeat = r'E:\Data\EROlson\test.gdb\MiscNetFeat'
+miscNetFeat = 
 
 #Geometric Network junctions dataset
-geoNetJunct = r'E:\Data\EROlson\test.gdb\ElectricGeomNetwork_Junctions'
+geoNetJunct = 
 
 
 #Complete list of data paths
