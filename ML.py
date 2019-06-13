@@ -43,5 +43,5 @@ def calculateML(feederID,dataPath):
         
 #### Function Parameters ####
 feederID = ['001901']
-secOH = r'E:\Data\EROlson\test.gdb\SecOH'
+secOH = r'\ELECDIST.ElectricDist\ELECDIST.SecOHElectricLineSegment'
 calculateML(feederID, secOH)
