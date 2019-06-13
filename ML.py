@@ -43,5 +43,13 @@ def calculateML(feederID,dataPath):
         
 #### Function Parameters ####
 feederID = ['001901']
+priOH = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde\ELECDIST.ElectricDist\ELECDIST.PriOHElectricLineSegment'
+priUG = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde\ELECDIST.ElectricDist\ELECDIST.PriUGElectricLineSegment'
 secOH = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde\ELECDIST.ElectricDist\ELECDIST.SecOHElectricLineSegment'
+secUG = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde\ELECDIST.ElectricDist\ELECDIST.SecUGElectricLineSegment'
+
+#### Call and Execute calculate ML function ####
+calculateML(feederID, priOH)
+calculateML(feederID, priUG)
 calculateML(feederID, secOH)
+calculateML(feederID, secUG)
