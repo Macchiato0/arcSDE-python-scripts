@@ -1,3 +1,13 @@
+'''
+This script has been developed for the purpose of creating a streamlined, automation solution
+for calculating the values for the Measured Length & Length Source fields.
+
+Things to add:
+        1) Add workspace paramenter for function
+        2) Test as a tool and add necessary GetParameterAsText() variable assignment
+        3) Determine proper string formatting for assigning FC data paths to variables
+'''
+#create function for calculating the value for "Measured Length" field
 def calculateML(feederID,dataPath):
     searchFields = ["OBJECTID","SHAPE@LENGTH"]
     updateFields = ["OBJECTID","MEASUREDLENGTH","LENGTHSOURCE"]
