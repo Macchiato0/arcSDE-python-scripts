@@ -1,8 +1,8 @@
 '''
 This script has been developed for the purpose of:
-                                                    1) Making a list of FeederIDs that have null values in ANY of the input data FCs
-                                                    2) Making a list of FeederIDs that have null values AND Isolators associated with
-                                                       the given FeederIDs
+          1) Making a list of FeederIDs that have null values in ANY of the input data FCs
+          2) Making a list of FeederIDs that have null values AND Isolators associated with
+             the given FeederIDs
                                                   
 '''
 #input data
