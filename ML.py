@@ -48,7 +48,7 @@ priUG = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde\ELECDIST.ElectricDist\ELEC
 secOH = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde\ELECDIST.ElectricDist\ELECDIST.SecOHElectricLineSegment'
 secUG = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde\ELECDIST.ElectricDist\ELECDIST.SecUGElectricLineSegment'
 
-#### Call and Execute calculate ML function ####
+#### Call and Execute calculate ML function on ALL necessary FCs####
 calculateML(feederID, priOH)
 calculateML(feederID, priUG)
 calculateML(feederID, secOH)
