@@ -2,5 +2,5 @@
 Conduct geoprocessing tasks within:
 <ul>
   <li>ArcGIS ArcSDE versioned geodatabase</li>
-  <li>Utility Geometric Network</li>
+  <li>ArcFM Utility Geometric Network</li>
 </ul>
