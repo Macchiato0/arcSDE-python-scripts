@@ -20,13 +20,6 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
     workHQField = "WORKHEADQUARTERS"
     for feeder in feederID:
         SQL = """{0} = '{1}' AND {2} IS NULL""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder,arcpy.AddFieldDelimiters(dataPath,workHQField))
-        #!myDict = {}
-        #!searchCursor = arcpy.da.SearchCursor(dataPath,searchFields,SQL)
-        #!for row in searchCursor:
-          #!  objID = row[0]
-            #!objLength =row[1]
-            #!myDict[objID] = objLength
-        #!del searchCursor
 
         #set workspace
         workspace = 
@@ -43,8 +36,8 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
         
         updateCursor = arcpy.da.UpdateCursor(dataPath,updateFields,SQL)
         for row in updateCursor:
-            row[0] = #need to stor workHQ value somewhere???
-            updateCursor.updateRow(item)
+            row[0] = workHeadquarters
+            updateCursor.updateRow(row)
         del updateCursor
         
         # Stop the edit operation.
