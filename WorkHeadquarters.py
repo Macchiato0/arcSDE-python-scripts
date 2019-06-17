@@ -14,7 +14,6 @@ This script is being developed for the purpose of updating the work headquarters
 
 '''
 def calculateHQ(feederID,dataPath,workHeadquarters):
-    #!searchFields = ["OBJECTID","SHAPE@LENGTH"]
     updateFields = ["WORKHEADQUARTERS"]
     feederField = "FEEDERID"
     workHQField = "WORKHEADQUARTERS"
