@@ -13,3 +13,71 @@ This script is being developed for the purpose of updating the work headquarters
                     11.	Voltage Regulator (Regulators and Boosters in ArcMap TOC)
 
 '''
+def calculateHQ(feederID,dataPath,workHeadquarters):
+    #!searchFields = ["OBJECTID","SHAPE@LENGTH"]
+    updateFields = ["WORKHEADQUARTERS"]
+    feederField = "FEEDERID"
+    workHQField = "WORKHEADQUARTERS"
+    for feeder in feederID:
+        SQL = """{0} = '{1}' AND {2} IS NULL""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder,arcpy.AddFieldDelimiters(dataPath,workHQField))
+        #!myDict = {}
+        #!searchCursor = arcpy.da.SearchCursor(dataPath,searchFields,SQL)
+        #!for row in searchCursor:
+          #!  objID = row[0]
+            #!objLength =row[1]
+            #!myDict[objID] = objLength
+        #!del searchCursor
+
+        #set workspace
+        workspace = 
+        
+        # Start an edit session. Must provide the worksapce.
+        edit = arcpy.da.Editor(workspace)
+        
+        # Edit session is started without an undo/redo stack for versioned data
+        #  (for second argument, use False for unversioned data)
+        edit.startEditing(False, True)
+        
+        # Start an edit operation
+        edit.startOperation()
+        
+        updateCursor = arcpy.da.UpdateCursor(dataPath,updateFields,SQL)
+        for row in updateCursor:
+            row[0] = #need to stor workHQ value somewhere???
+            updateCursor.updateRow(item)
+        del updateCursor
+        
+        # Stop the edit operation.
+        edit.stopOperation()
+        
+        # Stop the edit session and save the changes
+        edit.stopEditing(True)
+        
+        
+#### Function Parameters ####
+feederID = ['']
+workHeadquarters = ''
+priOH = 
+priUG = 
+secOH = 
+secUG = 
+dynProDev = 
+fuse = 
+switch = 
+miscNetFeat = 
+capacitor = 
+transformer = 
+regulatorBooster = 
+
+#### Call and Execute function on ALL necessary FCs####
+calculateHQ(feederID, priOH, workHeadquarters)
+calculateHQ(feederID, priUG, workHeadquarters)
+calculateHQ(feederID, secOH, workHeadquarters)
+calculateHQ(feederID, secUG, workHeadquarters)
+calculateHQ(feederID, dynProDev, workHeadquarters)
+calculateHQ(feederID, fuse, workHeadquarters)
+calculateHQ(feederID, switch, workHeadquarters)
+calculateHQ(feederID, miscNetFeat, workHeadquarters)
+calculateHQ(feederID, capacitor, workHeadquarters)
+calculateHQ(feederID, transformer, workHeadquarters)
+calculateHQ(feederID, regulatorBooster, workHeadquarters)
