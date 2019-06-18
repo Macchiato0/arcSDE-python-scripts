@@ -21,7 +21,7 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
         SQL = """{0} = '{1}' AND {2} IS NULL""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder,arcpy.AddFieldDelimiters(dataPath,workHQField))
 
         #set workspace
-        workspace = r'E:\Apps\Application Launch\Electric\Documents\GenericAsBJLahmeyerToDGSEQ011.sde'
+        workspace = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde'
         
         # Start an edit session. Must provide the worksapce.
         edit = arcpy.da.Editor(workspace)
@@ -47,8 +47,8 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
         
         
 #### Function Parameters ####
-feederID = ['077601']
-workHeadquarters = 'MUS'
+feederID = ['030602','007304']
+workHeadquarters = 'BIG'
 priOH = r'Primary Lines\Primary Overhead Conductor'
 priUG = r'Primary Lines\Primary Underground Conductor'
 secOH = r'Customers & Transformers\Secondary Overhead Conductor'
