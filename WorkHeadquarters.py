@@ -21,7 +21,7 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
         SQL = """{0} = '{1}' AND {2} IS NULL""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder,arcpy.AddFieldDelimiters(dataPath,workHQField))
 
         #set workspace
-        workspace = 
+        workspace = r'E:\Apps\Application Launch\Electric\Documents\GenericAsBJLahmeyerToDGSEQ011.sde'
         
         # Start an edit session. Must provide the worksapce.
         edit = arcpy.da.Editor(workspace)
@@ -49,17 +49,17 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
 #### Function Parameters ####
 feederID = ['']
 workHeadquarters = ''
-priOH = 
-priUG = 
-secOH = 
-secUG = 
-dynProDev = 
-fuse = 
-switch = 
-miscNetFeat = 
-capacitor = 
-transformer = 
-regulatorBooster = 
+priOH = r'Primary Lines\Primary Overhead Conductor'
+priUG = r'Primary Lines\Primary Underground Conductor'
+secOH = r'Customers & Transformers\Secondary Overhead Conductor'
+secUG = r'Customers & Transformers\Secondary Underground Conductor'
+dynProDev = r'Devices\Protective Devices & Switches\Dynamic Protective Device'
+fuse = r'Devices\Protective Devices & Switches\Fuse'
+switch = r'Devices\Protective Devices & Switches\Switch'
+miscNetFeat = r'Misc Network Features\Tap Dots, T-points, & Wire Changes'
+capacitor = r'Devices\Primary Devices\Capacitors'
+transformer = r'Customers & Transformers\Secondary Transformers'
+regulatorBooster = r'Devices\Primary Devices\Regulators & Boosters'
 
 #### Call and Execute function on ALL necessary FCs####
 calculateHQ(feederID, priOH, workHeadquarters)
