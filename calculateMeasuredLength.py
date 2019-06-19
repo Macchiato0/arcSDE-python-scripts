@@ -24,7 +24,7 @@ def calculateML(feederID,dataPath):
         del searchCursor
 
         #set workspace
-        workspace = 
+        workspace = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde'
         
         # Start an edit session. Must provide the worksapce.
         edit = arcpy.da.Editor(workspace)
@@ -52,11 +52,13 @@ def calculateML(feederID,dataPath):
         
         
 #### Function Parameters ####
-feederID = ['001901']
-priOH = 
-priUG = 
-secOH = 
-secUG = 
+feederID = ['091501','000704','010008','036801','123601',
+'136901','124701','032801','032501','148201']
+
+priOH = r'Primary Lines\Primary Overhead Conductor'
+priUG = r'Primary Lines\Primary Underground Conductor'
+secOH = r'Customers & Transformers\Secondary Overhead Conductor'
+secUG = r'Customers & Transformers\Secondary Underground Conductor'
 
 #### Call and Execute calculate ML function on ALL necessary FCs####
 calculateML(feederID, priOH)
