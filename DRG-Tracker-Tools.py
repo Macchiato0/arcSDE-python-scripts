@@ -51,10 +51,42 @@ the master google sheet tacker for billing purposes.
 
 #### Transformers Added or Removed ####
 '''
-
+1) Access Transformer FC
+2) Execute selection
+    - SQL expression: FEEDERID = '%FeederID%' AND (CONSTRUCTIONSTATUS = 50)
+    - SQL expression: FEEDERID = '%FeederID%' AND (CONSTRUCTIONSTATUS = 55)
+3) Get count of total number of records returned from each selection
 '''
 
 #### RePhased Transformers ####
 '''
+1) Access Transformer FC
+2) Execute selection
+    - SQL expression: FEEDERID = '%FeederID%' AND FLAG_FOR_EXCEPTION = 'Wrong Phase'
+3) Get count of total number of records returned 
+'''
 
+#### RePhased Customers ####
+'''
+1) Access Service Points FC
+2) Execute selection
+    - SQL expression: FEEDERID = '%FeederID%' AND (FLAG_FOR_EXCEPTION = 'Wrong Phase' OR COMMENTS = 'FED BY ANOTHER CIRCUIT')
+3) Get count of total number of records returned 
+'''
+
+#### Customers Added or Removed ####
+'''
+1) Access Service Points FC
+2) Execute selection
+    - SQL expression: FEEDERID = '%FeederID%' AND CONSTRUCTIONSTATUS = 50
+    - SQL expression: FEEDERID = '%FeederID%' AND CONSTRUCTIONSTATUS = 55
+3) Get count of total number of records returned for both selections
+'''
+
+#### Number of Service Points ####
+'''
+1) Access Service Points FC
+2) Execute selection
+    - SQL expression: FEEDERID = '%FeederID%'
+3) Get count of total number of records returned 
 '''
