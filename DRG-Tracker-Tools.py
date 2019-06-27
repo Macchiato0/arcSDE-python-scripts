@@ -41,3 +41,20 @@ the master google sheet tacker for billing purposes.
 4) Remove join
 '''
 
+#### Streetlight ####
+'''
+1) Access Streetlight FC
+2) Execute selection
+    - SQL expression: "SUBSTATIONID" = '%SubstationID%' AND "CIRCUITID" = '%CircuitID%'
+3) Get count of total number of records returned
+'''
+
+#### Transformers Added or Removed ####
+'''
+
+'''
+
+#### RePhased Transformers ####
+'''
+
+'''
