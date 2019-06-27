@@ -33,5 +33,11 @@ the master google sheet tacker for billing purposes.
 
 #### Poles with JU ####
 '''
-
+1) Access Support Structure FC
+2) Execute selection
+    - SQL expression: SUBSTATIONID = '%SubstationID%' AND CIRCUITID = '%CircuitID%'
+3) Initiate "Join" w/ Attachment FC (by ObjectID, Keep only matching records)
+    - Get count of total number of returned records for "Poles with JU"
+4) Remove join
 '''
+
