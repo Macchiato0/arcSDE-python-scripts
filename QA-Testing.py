@@ -2,6 +2,7 @@
 Python script to automate the QA process when SDEs are recieved back from DRG.
 
 Initial process thoughts:
+1)  Only select features within boundary of feederID
 1)  Do initial scrape of SDE to remove all features marked remove/delete from the
 following feature classes:
             -Primary OH & UG
