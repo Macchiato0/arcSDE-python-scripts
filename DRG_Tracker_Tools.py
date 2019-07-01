@@ -10,6 +10,8 @@ the master google sheet tacker for billing purposes.
     -SQL expression: SUBSTATIONID = '%SubstationID%' AND CIRCUITID = '%CircuitID%' AND USAGETYPE = 'URB'
     -Total number of returned records equals the value for HVD Pole Photos
 '''
+def selectionReturn(inPath,SQL):
+    
 
 #### Delivered Poles ####
 '''
