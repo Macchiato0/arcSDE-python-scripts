@@ -10,8 +10,14 @@ the master google sheet tacker for billing purposes.
     -SQL expression: SUBSTATIONID = '%SubstationID%' AND CIRCUITID = '%CircuitID%' AND USAGETYPE = 'URB'
     -Total number of returned records equals the value for HVD Pole Photos
 '''
-def selectionReturn(inPath,SQL):
-    
+def searchreturn(inPath, SQL):
+    searchCursor = arcpy.da.SearchCursor(inPath, "*", SQL)
+    #create counter
+    count = 0
+    for i in searchCursor:
+        count = count + 1
+    del searchCursor
+    return count 
 
 #### Delivered Poles ####
 '''
