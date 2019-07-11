@@ -39,6 +39,35 @@ secUG =
 #Geometric Network junctions dataset
 geoNetJunct = 
 
+#Boundary Feeder Go dataset
+circuitBoundary = 
+
+###Find gemetric network junctions that overlap with proper circuit boundary layer###
+
+#list of geometric network junctions that are intersected by circuit boundary layer
+circuitGeoNetJunctList = []
+
+#list of feature classes used in select by location analysis to find stranded geometric network junctions
+selectByList = [circuitBoundary]
+
+#Start looping through FCs
+
+for i in selectByList:
+
+    #create layer to select from
+    myBoundaryLyr = arcpy.MakeFeatureLayer_management(geoNetJunct, 'boundaryGeoNetJunct_lyr')
+    
+    #select by location
+    myBoundarySelection = arcpy.SelectLayerByLocation_management(myBoundaryLyr,"COMPLETELY_WITHIN",i,"","NEW_SELECTION")
+
+    #search cursor used to append list of geometric network junction object IDs that are within feeder boundary to list
+    cursor = arcpy.da.SearchCursor(myBoundarySelection, ["OBJECTID"])
+    
+    for row in cursor:
+        if row[0] not in circuitGeoNetJunctList:
+            circuitGeoNetJunctList.append(row[0])
+    
+    del cursor
 ###Find geometric network junctions attached to lines --> delete all others###
 
 #list of geometric network junctions that are intersected by a layer in selectByList
