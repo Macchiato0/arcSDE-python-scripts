@@ -6,6 +6,7 @@ Initial process thoughts:
 
 2)  Conduct "Select By Location" geoprocessing to find any "floating"
 geometric network features & Taps and delete "floating" ones.
+***try using a set for OBJIDs instead of list?***
 
     ***geometric network junctions are only on linear features!!!***
 
