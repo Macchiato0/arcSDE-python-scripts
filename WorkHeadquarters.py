@@ -47,8 +47,13 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
         
         
 #### Function Parameters ####
-feederID = ['148201']
-workHeadquarters = 'HML'
+feederID = [
+'069101',
+'069102',
+'099001',
+'099002'
+]
+workHeadquarters = 'LAN'
 priOH = r'Primary Lines\Primary Overhead Conductor'
 priUG = r'Primary Lines\Primary Underground Conductor'
 secOH = r'Customers & Transformers\Secondary Overhead Conductor'
