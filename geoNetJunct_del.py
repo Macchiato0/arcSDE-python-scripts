@@ -106,5 +106,5 @@ with arcpy.da.UpdateCursor(geoNetJunct, ["OBJECTID"]) as cursor:
             print row[0]
             cursor.deleteRow()
 
-### EOlson 05/2019 ###
+### EOlson 07/2019 ###
 ### rosemary.erin.o@gmail.com ###
