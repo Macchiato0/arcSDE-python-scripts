@@ -95,7 +95,7 @@ for i in selectByList:
     
     del cursor
 
-#now we need to delete any rows whose OBJ IDs are NOT in the geoNetJunctIntersectedList
+#now we need to delete any rows whose OBJ IDs are NOT in the geoNetJunctIntersectedList BUT ARE IN the circuitGeoNetJunctList
     
 with arcpy.da.UpdateCursor(geoNetJunct, ["OBJECTID"]) as cursor:
     #for each row evaluate if the Object ID is in the geoNetJunctIntersectedList
