@@ -101,7 +101,7 @@ with arcpy.da.UpdateCursor(geoNetJunct, ["OBJECTID"]) as cursor:
     #for each row evaluate if the Object ID is in the geoNetJunctIntersectedList
     #if not in list --> then delete!
     for row in cursor:
-        if row[0] not in geoNetJunctIntersectedList:
+        if row[0] not in geoNetJunctIntersectedList and row[0] in circuitGeoNetJunctList:
             print row[0]
             cursor.deleteRow()
 
