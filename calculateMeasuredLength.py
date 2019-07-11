@@ -52,8 +52,28 @@ def calculateML(feederID,dataPath):
         
         
 #### Function Parameters ####
-feederID = ['091501','000704','010008','036801','123601',
-'136901','124701','032801','032501','148201']
+feederID = [
+'162201',
+'162202',
+'098501',
+'098502',
+'029501',
+'029502',
+'057101',
+'057102',
+'080801',
+'080802',
+'069101',
+'069102',
+'026901',
+'026902',
+'067401',
+'067403',
+'099001',
+'099002',
+'067301',
+'067302'
+]
 
 priOH = r'Primary Lines\Primary Overhead Conductor'
 priUG = r'Primary Lines\Primary Underground Conductor'
