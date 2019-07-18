@@ -6,6 +6,7 @@ Things to add:
         1) Add workspace paramenter for function
         2) Test as a tool and add necessary GetParameterAsText() variable assignment
         3) Determine proper string formatting for assigning FC data paths to variables
+        ****Maybe remove "IS NULL" from SQL selection****
 '''
 #create function for calculating the value for "Measured Length" field
 def calculateML(feederID,dataPath):
