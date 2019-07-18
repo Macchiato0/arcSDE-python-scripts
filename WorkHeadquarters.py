@@ -11,6 +11,8 @@ This script is being developed for the purpose of updating the work headquarters
                     9.	Switch
                     10.	Transformer
                     11.	Voltage Regulator (Regulators and Boosters in ArcMap TOC)
+                    
+                    **** Maybe remove the "IS NULL" part of the SQL selection so every record for a feederID is updated properly ****
 
 '''
 def calculateHQ(feederID,dataPath,workHeadquarters):
