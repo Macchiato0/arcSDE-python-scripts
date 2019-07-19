@@ -12,6 +12,10 @@ geometric network features & Taps and delete "floating" ones.
 
 3)  Then gReady will be run to find any remaining errors that need to be looked
 at maually by an analyst.
+
+####This has been run in the test GDB and appears to be working quite nicely. Integration into a replica QA GDB needs to be closely 
+asessed before implementation.
+####
 '''
 
 import arcpy
