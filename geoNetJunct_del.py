@@ -21,27 +21,27 @@ arcpy.env.overwriteOutput = True
 arcpy.env.addOutputsToMap = False
 
 #assign workspace
-arcpy.env.workspace = 
+arcpy.env.workspace = r'E:\Data\EROlson\test.gdb'
 
 ###input data paths###
 
 #Primary Overhead dataset
-priOH = 
+priOH = 'test_OH_pri'
 
 #Primary Underground dataset
-priUG = 
+priUG = 'PriUG'
 
 #Secondary Overhead dataset
-secOH = 
+secOH = 'SecOH'
 
 #Secondary Underground dataset
-secUG = 
+secUG = 'SecUG'
 
 #Geometric Network junctions dataset
-geoNetJunct = 
+geoNetJunct = 'electGeoNet_0719'
 
 #Boundary Feeder Go dataset
-circuitBoundary = 
+circuitBoundary = 'circuitBoundary'
 
 ###Find gemetric network junctions that overlap with proper circuit boundary layer###
 
