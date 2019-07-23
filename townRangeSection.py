@@ -1,13 +1,13 @@
-def calculateTownRangeSection():
-  ####Some basic steps####
-  '''
-  SectionName is a feature class in the LandBase SDE connection. There is a 6-digit numeric sequence that is a unique ID for each polygon
-  in the sectionname attribut field.
-  
-  We need the section name code transfered for the following feature classes for a specific feederID:
-    -Misc. Network Features
-    -Fuse
-    -Switch
-    
-  Some sort of "select by location" analysis will need to be done to identify which feederIDs are within a given section.
-  '''
+feederID = '150701'
+miscNetFeat = #update with data path
+TRS = #update with data path
+
+def findTRS():
+#create layer to select from
+myLyr = arcpy.MakeFeatureLayer_management(miscNetFeat, 'miscNetFeat_lyr')
+
+#select by location
+mySelection = arcpy.SelectLayerByLocation_management(myLyr,"COMPLETELY_WITHIN",TRS,"","NEW_SELECTION")
+
+#search cursor used to append list of geometric network junction object IDs that are within feeder boundary to list
+cursor = arcpy.da.SearchCursor(mySelection, ["OBJECTID"])
