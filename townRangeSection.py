@@ -1,13 +1,17 @@
-feederID = '150701'
-miscNetFeat = #update with data path
-TRS = #update with data path
+def findTRS(feederID,dataPath):
+  feederField = "FEEDERID"
+  TRS = #Town Range Section feature class
+  for feeder in feederID:
+    #create SQL clause for feature layer selection
+    SQL = """{0} = '{1}'""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder)
 
-def findTRS():
-#create layer to select from
-myLyr = arcpy.MakeFeatureLayer_management(miscNetFeat, 'miscNetFeat_lyr')
+    #create layer from input datapath to select from
+    dataPathLyr = arcpy.MakeFeatureLayer_management(dataPath, 'output_lyr', SQL)
 
-#select by location
-mySelection = arcpy.SelectLayerByLocation_management(myLyr,"COMPLETELY_WITHIN",TRS,"","NEW_SELECTION")
+    #select by location
+    ####I think this selection is wrong. Read the documentation on this tool before proceeding####
+    #http://desktop.arcgis.com/en/arcmap/10.3/tools/data-management-toolbox/select-layer-by-location.htm
+    mySelection = arcpy.SelectLayerByLocation_management(dataPathLyr,"COMPLETELY_WITHIN",TRS,"","NEW_SELECTION")
 
-#search cursor used to append list of geometric network junction object IDs that are within feeder boundary to list
-cursor = arcpy.da.SearchCursor(mySelection, ["OBJECTID"])
+    #search cursor used to append list of geometric network junction object IDs that are within feeder boundary to list
+    cursor = arcpy.da.SearchCursor(mySelection, ["OBJECTID"])
