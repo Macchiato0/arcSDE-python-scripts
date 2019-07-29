@@ -80,10 +80,9 @@ myBoundarySelection = arcpy.SelectLayerByLocation_management(myBoundaryLyr,"COMP
 cursor = arcpy.da.SearchCursor(myBoundarySelection, ["OBJECTID"])
 
 for row in cursor:
-  if row[0] not in circuitGeoNetJunctList:
+   if row[0] not in circuitGeoNetJunctList:
       circuitGeoNetJunctList.append(row[0])
-    
-    del cursor
+del cursor
 ###Find geometric network junctions attached to lines --> delete all others###
 
 #list of geometric network junctions that are intersected by a layer in selectByList
@@ -97,12 +96,13 @@ selectByList = [OHline, UGline, priOH, priUG, secOH, secUG]
 for i in selectByList:
 
     #create layer to select from
-    myLyr = arcpy.MakeFeatureLayer_management(geoNetJunct, 'geoNetJunct_lyr')
+    #!myLyr = arcpy.MakeFeatureLayer_management(geoNetJunct, 'geoNetJunct_lyr')
+    #!instead of code above just use existing lyr file for geometric network junctions myBoundaryLyr
     
     #select by location
-    mySelection = arcpy.SelectLayerByLocation_management(myLyr,"INTERSECT",i,"","NEW_SELECTION")
+    mySelection = arcpy.SelectLayerByLocation_management(myBoundaryLyr,"INTERSECT",i,"","NEW_SELECTION")
 
-    #search cursor used to append list of tap dot object IDs that are intersected by line feature to list
+    #search cursor used to append list of geometric network junction object IDs that are intersected by line feature to list
     cursor = arcpy.da.SearchCursor(mySelection, ["OBJECTID"])
     
     for row in cursor:
@@ -123,3 +123,6 @@ with arcpy.da.UpdateCursor(geoNetJunct, ["OBJECTID"]) as cursor:
 
 ### EOlson 07/2019 ###
 ### rosemary.erin.o@gmail.com ###
+###!!!This is from my test!!!!!
+>>> print geoNetJunctIntersectedList
+[25, 80, 86]
