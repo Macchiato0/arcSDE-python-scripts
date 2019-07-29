@@ -29,23 +29,29 @@ arcpy.env.workspace = r'E:\Data\EROlson\test.gdb'
 
 ###input data paths###
 
+#OH Connector Line
+OHline = r'Customers & Transformers\Transformer Connector Lines\OH Connector Line'
+
+#UG Connector Line
+UGline = r'Customers & Transformers\Transformer Connector Lines\UG Connector Line'
+
 #Primary Overhead dataset
-priOH = 'test_OH_pri'
+priOH = r'Primary Lines\Primary Overhead Conductor'
 
 #Primary Underground dataset
-priUG = 'PriUG'
+priUG = r'Primary Lines\Primary Underground Conductor'
 
 #Secondary Overhead dataset
-secOH = 'SecOH'
+secOH = r'Customers & Transformers\Secondary Overhead Conductor'
 
 #Secondary Underground dataset
-secUG = 'SecUG'
+secUG = r'Customers & Transformers\Secondary Underground Conductor'
 
 #Geometric Network junctions dataset
-geoNetJunct = 'electGeoNet_0719'
+geoNetJunct = r'Misc Network Features\ELECDIST.ElectricGeomNetwork_Junctions'
 
 #Boundary Feeder Go dataset
-circuitBoundary = 'circuitBoundary'
+circuitBoundary = r'Org Bounds\Circuit Boundaries'
 
 ###Find gemetric network junctions that overlap with proper circuit boundary layer###
 
@@ -79,7 +85,7 @@ for i in selectByList:
 geoNetJunctIntersectedList = []
 
 #list of feature classes used in select by location analysis to find stranded geometric network junctions
-selectByList = [priOH, priUG, secOH, secUG]
+selectByList = [OHline, UGline, priOH, priUG, secOH, secUG]
 
 #Start looping through FCs
 
