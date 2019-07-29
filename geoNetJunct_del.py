@@ -25,7 +25,10 @@ arcpy.env.overwriteOutput = True
 arcpy.env.addOutputsToMap = False
 
 #assign workspace
-arcpy.env.workspace = r'E:\Data\EROlson\test.gdb'
+arcpy.env.workspace = #do I need to hvae this???
+
+#FeederID being QA'd
+feeder = '012701'
 
 ###input data paths###
 
@@ -53,6 +56,11 @@ geoNetJunct = r'Misc Network Features\ELECDIST.ElectricGeomNetwork_Junctions'
 #Boundary Feeder Go dataset
 circuitBoundary = r'Org Bounds\Circuit Boundaries'
 
+#SQL expression for feeder boundary
+feederField = "FEEDERID"
+
+SQL = """{0} = '{1}'""".format(arcpy.AddFieldDelimiters(circuitBoundary,feederField),feeder)
+
 ###Find gemetric network junctions that overlap with proper circuit boundary layer###
 
 #list of geometric network junctions that are intersected by circuit boundary layer
@@ -66,7 +74,7 @@ selectByList = [circuitBoundary]
 for i in selectByList:
 
     #create layer to select from
-    myBoundaryLyr = arcpy.MakeFeatureLayer_management(geoNetJunct, 'boundaryGeoNetJunct_lyr')
+    myBoundaryLyr = arcpy.MakeFeatureLayer_management(geoNetJunct, 'boundaryGeoNetJunct_lyr', SQL)
     
     #select by location
     myBoundarySelection = arcpy.SelectLayerByLocation_management(myBoundaryLyr,"COMPLETELY_WITHIN",i,"","NEW_SELECTION")
