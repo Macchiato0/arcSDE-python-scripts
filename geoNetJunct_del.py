@@ -27,9 +27,6 @@ arcpy.env.addOutputsToMap = False
 #assign workspace
 arcpy.env.workspace = #do I need to hvae this???
 
-#FeederID being QA'd
-feeder = '012701'
-
 ###input data paths###
 
 #OH Connector Line
@@ -56,7 +53,11 @@ geoNetJunct = r'Misc Network Features\ELECDIST.ElectricGeomNetwork_Junctions'
 #Boundary Feeder Go dataset
 circuitBoundary = r'Org Bounds\Circuit Boundaries'
 
-#SQL expression for feeder boundary
+####SQL expression for feeder boundary####
+
+#FeederID being QA'd
+feeder = '012701'
+
 feederField = "FEEDERID"
 
 SQL = """{0} = '{1}'""".format(arcpy.AddFieldDelimiters(circuitBoundary,feederField),feeder)
@@ -66,25 +67,21 @@ SQL = """{0} = '{1}'""".format(arcpy.AddFieldDelimiters(circuitBoundary,feederFi
 #list of geometric network junctions that are intersected by circuit boundary layer
 circuitGeoNetJunctList = []
 
-#list of feature classes used in select by location analysis to find stranded geometric network junctions
-selectByList = [circuitBoundary]
+#create layer to select from
+myBoundaryLyr = arcpy.MakeFeatureLayer_management(geoNetJunct, 'boundaryGeoNetJunct_lyr')
 
-#Start looping through FCs
+#create circuit boundary layer w/SQL to select from
+myCircuitBoundaryLyr = arcpy.MakeFeatureLayer_management(circuitBoundary, 'boundaryCircuit_lyr',SQL)
 
-for i in selectByList:
+#select by location
+myBoundarySelection = arcpy.SelectLayerByLocation_management(myBoundaryLyr,"COMPLETELY_WITHIN",myCircuitBoundaryLyr,"","NEW_SELECTION")
 
-    #create layer to select from
-    myBoundaryLyr = arcpy.MakeFeatureLayer_management(geoNetJunct, 'boundaryGeoNetJunct_lyr', SQL)
-    
-    #select by location
-    myBoundarySelection = arcpy.SelectLayerByLocation_management(myBoundaryLyr,"COMPLETELY_WITHIN",i,"","NEW_SELECTION")
+#search cursor used to append list of geometric network junction object IDs that are within feeder boundary to list
+cursor = arcpy.da.SearchCursor(myBoundarySelection, ["OBJECTID"])
 
-    #search cursor used to append list of geometric network junction object IDs that are within feeder boundary to list
-    cursor = arcpy.da.SearchCursor(myBoundarySelection, ["OBJECTID"])
-    
-    for row in cursor:
-        if row[0] not in circuitGeoNetJunctList:
-            circuitGeoNetJunctList.append(row[0])
+for row in cursor:
+  if row[0] not in circuitGeoNetJunctList:
+      circuitGeoNetJunctList.append(row[0])
     
     del cursor
 ###Find geometric network junctions attached to lines --> delete all others###
