@@ -56,7 +56,7 @@ circuitBoundary = r'Org Bounds\Circuit Boundaries'
 ####SQL expression for feeder boundary####
 
 #FeederID being QA'd
-feeder = '012701'
+feeder = '084003'
 
 feederField = "FEEDERID"
 
