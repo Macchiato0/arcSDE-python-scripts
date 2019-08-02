@@ -28,9 +28,8 @@ fuse = r'E:\Data\EROlson\test.gdb\Fuse'
 
 ####Feeder ID(s)####
 feederID = [150701,150702]
+
 ###Testing step 1###
-
-
 fieldNames = ["SWITCHSYMBOLTYPE", "EQUIPMENTID"]
 
 for ID in feederID:
@@ -53,15 +52,16 @@ for ID in feederID:
 We need to report the total number of added/removed Service Points and Secondary
 Transformers per Feeder ID.
 '''
-servicePoints = r'E:\Data\EROlson\test.gdb\ServicePoint'
+#find and return added service points
 for ID in feederID:
     cursor = arcpy.da.SearchCursor(servicePoints,"*","FEEDERID = '{0}' AND CONSTRUCTIONSTATUS=50".format(ID))
     count = 0
     for row in cursor:
         count += 1
 
-print ('Total added service points: ' + str(count))
+print (ID' Total added service points: ' + str(count))
 
+#find and return added transformers
 transformer = r'E:\Data\EROlson\test.gdb\Transformer'
 for ID in feederID:
     cursor = arcpy.da.SearchCursor(transformer,"*","FEEDERID = '{0}' AND CONSTRUCTIONSTATUS=50".format(ID))
@@ -69,7 +69,7 @@ for ID in feederID:
     for row in cursor:
         count += 1
 
-print ('Total added transformers: ' + str(count))
+print (ID' Total added transformers: ' + str(count))
 ###Testing step 4###
 '''
 Calculate number of removed service points with active meter status.
