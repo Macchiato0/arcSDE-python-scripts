@@ -1,5 +1,9 @@
+'''
+This script is used to find and retreive the object IDs of geometric network junctions that are intersected by a line FC.
+
+***When using this script be sure not to save any changes to the .mxd
+'''
 #Arcmap settings
-arcpy.env.overwriteOutput = True
 arcpy.env.addOutputsToMap = False
 
 ###input data paths###
@@ -51,3 +55,5 @@ for i in selectByList:
             geoNetJunctIntersectedList.append(row[0])
     
     del cursor
+
+print geoNetJunctIntersectedList 
