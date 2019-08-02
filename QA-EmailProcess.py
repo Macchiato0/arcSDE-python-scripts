@@ -20,28 +20,28 @@ Tierney O'Keefe and Shelly Jeltema
                 that were removed
                     -SQL code previously developed for this process
 '''
+####Required Data Paths####
+switch = r'E:\Data\EROlson\test.gdb\Switch'
+servicePoints = r'E:\Data\EROlson\test.gdb\ServicePoint'
+transformer = r'E:\Data\EROlson\test.gdb\Transformer'
+fuse = r'E:\Data\EROlson\test.gdb\Fuse'
 
-'''
-SQL Code for step 1:
-
-FEEDERID ='XXXXXX' AND SUBTYPECD = 4 AND SWITCHSYMBOLTYPE is NULL
-
-'''
-
+####Feeder ID(s)####
+feederID = [150701,150702]
 ###Testing step 1###
 
-myData = 
+
 fieldNames = ["SWITCHSYMBOLTYPE", "EQUIPMENTID"]
-feederID = [150701,150702]
+
 for ID in feederID:
-    cursor = arcpy.da.UpdateCursor(myData, fieldNames, "FEEDERID = '{0}' AND SUBTYPECD = 4 AND SWITCHSYMBOLTYPE IS NULL".format(ID))
+    cursor = arcpy.da.UpdateCursor(switch, fieldNames, "FEEDERID = '{0}' AND SUBTYPECD = 4 AND SWITCHSYMBOLTYPE IS NULL".format(ID))
     for row in cursor:
         row[0] = "LBEC"
         row[1] = "LBREAK_SW"
         cursor.updateRow(row)
     del cursor
 
-    cursor = arcpy.da.UpdateCursor(myData, fieldNames, "FEEDERID = '{0}' AND SUBTYPECD = 3 AND SWITCHSYMBOLTYPE IS NULL".format(ID))
+    cursor = arcpy.da.UpdateCursor(switch, fieldNames, "FEEDERID = '{0}' AND SUBTYPECD = 3 AND SWITCHSYMBOLTYPE IS NULL".format(ID))
     for row in cursor:
         row[0] = "LC"
         row[1] = "DIS_SW-600A"
@@ -50,22 +50,26 @@ for ID in feederID:
 
 ###Testing step 2###
 '''
-This portion of the process has been covered/completed in the QA Test script.
-'''
-
-###Testing step 3###
-'''
 We need to report the total number of added/removed Service Points and Secondary
 Transformers per Feeder ID.
 '''
-servicePoints = 
-cursor = arcpy.da.SearchCursor(servicePoints,"*","FEEDERID = '150701' AND CONSTRUCTIONSTATUS=50")
-count = 0
-for row in cursor:
-    count += 1
+servicePoints = r'E:\Data\EROlson\test.gdb\ServicePoint'
+for ID in feederID:
+    cursor = arcpy.da.SearchCursor(servicePoints,"*","FEEDERID = '{0}' AND CONSTRUCTIONSTATUS=50".format(ID))
+    count = 0
+    for row in cursor:
+        count += 1
+
 print ('Total added service points: ' + str(count))
 
+transformer = r'E:\Data\EROlson\test.gdb\Transformer'
+for ID in feederID:
+    cursor = arcpy.da.SearchCursor(transformer,"*","FEEDERID = '{0}' AND CONSTRUCTIONSTATUS=50".format(ID))
+    count = 0
+    for row in cursor:
+        count += 1
 
+print ('Total added transformers: ' + str(count))
 ###Testing step 4###
 '''
 Calculate number of removed service points with active meter status.
