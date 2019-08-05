@@ -15,7 +15,7 @@ def calculateML(feederID,dataPath):
     feederField = "FEEDERID"
     measureField = "MEASUREDLENGTH"
     for feeder in feederID:
-        SQL = """{0} = '{1}' AND {2} IS NULL""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder,arcpy.AddFieldDelimiters(dataPath,measureField))
+        SQL = """{0} = '{1}'""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder)
         myDict = {}
         searchCursor = arcpy.da.SearchCursor(dataPath,searchFields,SQL)
         for row in searchCursor:
@@ -31,7 +31,7 @@ def calculateML(feederID,dataPath):
         edit = arcpy.da.Editor(workspace)
         
         # Edit session is started without an undo/redo stack for versioned data
-        #  (for second argument, use False for unversioned data)
+        
         edit.startEditing(False, True)
         
         # Start an edit operation
@@ -54,23 +54,16 @@ def calculateML(feederID,dataPath):
         
 #### Function Parameters ####
 feederID = [
-'041201',
-'041202',
-'028801',
-'028802',
-'025902',
-'025903',
-'029601',
-'029602',
-'103501',
-'103502',
-'032301',
-'032302',
-'078601',
-'078602',
-'074901',
-'074902',
-'074903'
+'020902',
+'020903',
+'074801',
+'074802',
+'060401',
+'060402',
+'053301',
+'053302',
+'107501',
+'107502'
 ]
 
 priOH = r'Primary Lines\Primary Overhead Conductor'
