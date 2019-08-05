@@ -20,7 +20,7 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
     feederField = "FEEDERID"
     workHQField = "WORKHEADQUARTERS"
     for feeder in feederID:
-        SQL = """{0} = '{1}' AND {2} IS NULL""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder,arcpy.AddFieldDelimiters(dataPath,workHQField))
+        SQL = """{0} = '{1}'""".format(arcpy.AddFieldDelimiters(dataPath,feederField),feeder)
 
         #set workspace
         workspace = r'E:\Data\EROlson\PROD_ DGSEP011AsEROlson.sde'
@@ -50,18 +50,16 @@ def calculateHQ(feederID,dataPath,workHeadquarters):
         
 #### Function Parameters ####
 feederID = [
-'067303',
-'029101',
-'029102',
-'029103',
-'082201',
-'082202',
-'116501',
-'116502',
-'024901',
-'024902',
-'154101',
-'154102'
+'041202',
+'028801',
+'028802',
+'103501',
+'103502',
+'032301',
+'032302',
+'025501',
+'025502',
+'060201'
 ]
 workHeadquarters = 'HML'
 priOH = r'Primary Lines\Primary Overhead Conductor'
