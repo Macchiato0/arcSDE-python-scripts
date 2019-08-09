@@ -5,7 +5,10 @@ Needs to be done on unfrozen feeder IDs and also a tool that will update whole d
 
 Questions:
   1) What Feature classes need to be updated for TRS?
-  
+      -Transformers
+      -Fuses
+      -Misc. Net. Features
+      -Switches
 '''
 
 def findTRS(feederID,dataPath):
@@ -36,3 +39,5 @@ def findTRS(feederID,dataPath):
     for row in cursor:
       trsList.append(row)
     del cursor
+    
+    
