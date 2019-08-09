@@ -5,10 +5,12 @@ Needs to be done on unfrozen feeder IDs and also a tool that will update whole d
 
 Questions:
   1) What Feature classes need to be updated for TRS?
-      -Transformers
-      -Fuses
-      -Misc. Net. Features
-      -Switches
+        -Fuse
+        -DPD
+        -Switch
+        -Capacitors
+        -Isolators
+        -VoltageRegulators
 '''
 
 def findTRS(feederID,dataPath):
@@ -39,5 +41,13 @@ def findTRS(feederID,dataPath):
     for row in cursor:
       trsList.append(row)
     del cursor
+    
+    ####Now clip dataPath FC to individual TRS polygons####
+    #variable for SQL statement
+    objID = arcpy.AddFieldDelimiters(TRS,"OBJECTID")
+    
+    for i in trsLilst:
+      SQL = """{0} = {1}""".format(objID, i)
+      Clip_analysis (in_features, clip_features, out_feature_class, {cluster_tolerance})
     
     
