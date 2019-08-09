@@ -3,7 +3,6 @@ TRS attribute value needs to be updated for features with a null TRS value...
 
 Needs to be done on unfrozen feeder IDs and also a tool that will update whole database...
 
-Questions:
   1) What Feature classes need to be updated for TRS?
         -Fuse
         -DPD
@@ -13,8 +12,9 @@ Questions:
         -VoltageRegulators
 '''
 
-def findTRS(feederID,dataPath):
-  
+def findTRS(feederID,dataPath): #instead of this user should input list of feederIDs and DB connection to their version def findTRS(feederID,workspacePath)
+                                # set workspace to user input DB connection arcpy.env.workspace = workspacePath
+                                # then set code to loop through all required FC's to be updated
   #variables used for SQL statement
   feederField = arcpy.AddFieldDelimiters(dataPath,"FEEDERID")
   trsField = arcpy.AddFieldDelimiters(dataPath,"TRS")
@@ -45,9 +45,14 @@ def findTRS(feederID,dataPath):
     ####Now clip dataPath FC to individual TRS polygons####
     #variable for SQL statement
     objID = arcpy.AddFieldDelimiters(TRS,"OBJECTID")
-    
-    for i in trsLilst:
+
+    for i in trsList:
       SQL = """{0} = {1}""".format(objID, i)
-      Clip_analysis (in_features, clip_features, out_feature_class, {cluster_tolerance})
+      
+      #create layer w/specific object ID from TRS FC to clip from
+      trsLyr = arcpy.MakeFeatureLayer_management(TRS, 'trs_lyr', SQL)
+      
+      #create clip
+      trsClip = arcpy.Clip_analysis(dataPathLyr, trsLyr, out_feature_class)
     
     
