@@ -73,10 +73,10 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       #dictionary to store TRS ["SECTIONNAME"] value as key and all selected object IDs from dataPathLyr as values
       myDict = {} #myDict{key:[value1,value2,value3]}
       
-      #update "TRS" field in mySelection with sectionName variable
-      cursor = arcpy.da.SearchCursor(mySelection, ["TRS"])
+      #loop through mySelection and assign all selected object IDs as a value to TRS ["SECTIONNAME"] key
+      cursor = arcpy.da.SearchCursor(mySelection, ["OBJECTID"])
       for row in cursor:
-        row[0] = sectionName
+        myDict
       del cursor
       
       
