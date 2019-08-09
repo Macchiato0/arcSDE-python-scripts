@@ -42,7 +42,7 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       trsList.append(row)
     del cursor
     
-    ####Now clip dataPath FC to individual TRS polygons####
+    ####Now another Select By Location of dataPath FC to individual TRS polygons####
     #variable for SQL statement
     objID = arcpy.AddFieldDelimiters(TRS,"OBJECTID")
 
@@ -52,7 +52,19 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       #create layer w/specific object ID from TRS FC to clip from
       trsLyr = arcpy.MakeFeatureLayer_management(TRS, 'trs_lyr', SQL)
       
-      #create clip
-      trsClip = arcpy.Clip_analysis(dataPathLyr, trsLyr, out_feature_class)
+      #find section name value for trsLyr using a Search Cursor
+      cursor = arcpy.da.SearchCursor(trsLyr, ["SECTIONNAME"])
+      for row in cursor:
+        sectionName = row[0]
+      del cursor
+      
+      #select by location
+      mySelection = arcpy.SelectLayerByLocation_management(dataPathLyr,"COMPLETELY_WITHIN",trsLyr,"","NEW_SELECTION")
+      
+      #update "TRS" field in mySelection with sectionName variable
+      cursor = arcpy.da.SearchCursor(mySelection, ["TRS"])
+      for row in cursor:
+        row[0] = sectionName
+      del cursor
     
     
