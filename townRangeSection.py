@@ -15,7 +15,7 @@ Needs to be done on unfrozen feeder IDs and also a tool that will update whole d
 def findTRS(feederID,dataPath): #instead of this user should input list of feederIDs and DB connection to their version def findTRS(feederID,workspacePath)
                                 # set workspace to user input DB connection arcpy.env.workspace = workspacePath
                                 # then set code to loop through all required FC's to be updated
-  ####PDM_PROD data paths ####
+  ####PDM_PROD.mxd data paths ####
   #fuse = r'Devices\Protective Devices & Switches\Fuse'
   #DPD = r'Devices\Protective Devices & Switches\Dynamic Protective Device'
   #switch = r'Devices\Protective Devices & Switches\Switch'
@@ -53,10 +53,10 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
     
     ####Now another Select By Location of dataPath FC to individual TRS polygons####
     #variable for SQL statement
-    objID = arcpy.AddFieldDelimiters(TRS,"OBJECTID")
+    objIDField = arcpy.AddFieldDelimiters(TRS,"OBJECTID")
 
     for i in trsList:
-      SQL = """{0} = {1}""".format(objID, i)
+      SQL = """{0} = {1}""".format(objIDField, i)
       
       #create layer w/specific object ID from TRS FC to clip from
       trsLyr = arcpy.MakeFeatureLayer_management(TRS, 'trs_lyr', SQL)
@@ -70,10 +70,15 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       #select by location
       mySelection = arcpy.SelectLayerByLocation_management(dataPathLyr,"COMPLETELY_WITHIN",trsLyr,"","NEW_SELECTION")
       
+      #dictionary to store TRS ["SECTIONNAME"] value as key and all selected object IDs from dataPathLyr as values
+      myDict = {} #myDict{key:[value1,value2,value3]}
+      
       #update "TRS" field in mySelection with sectionName variable
       cursor = arcpy.da.SearchCursor(mySelection, ["TRS"])
       for row in cursor:
         row[0] = sectionName
       del cursor
+      
+      
     
     
