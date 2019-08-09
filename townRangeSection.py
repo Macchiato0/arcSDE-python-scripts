@@ -5,7 +5,7 @@ Needs to be done on unfrozen feeder IDs and also a tool that will update whole d
 
   1) What Feature classes need to be updated for TRS?
         -Fuse
-        -DPD
+        -Dynamic protective device
         -Switch
         -Capacitors
         -Isolators
@@ -15,6 +15,15 @@ Needs to be done on unfrozen feeder IDs and also a tool that will update whole d
 def findTRS(feederID,dataPath): #instead of this user should input list of feederIDs and DB connection to their version def findTRS(feederID,workspacePath)
                                 # set workspace to user input DB connection arcpy.env.workspace = workspacePath
                                 # then set code to loop through all required FC's to be updated
+  ####PDM_PROD data paths ####
+  #fuse = r'Devices\Protective Devices & Switches\Fuse'
+  #DPD = r'Devices\Protective Devices & Switches\Dynamic Protective Device'
+  #switch = r'Devices\Protective Devices & Switches\Switch'
+  #capacitors = r'Devices\Primary Devices\Capacitors'
+  #isolator = r'Devices\Primary Devices\Isolator'
+  #R&B = r'Devices\Primary Devices\Regulators & Boosters'
+  ############################
+  
   #variables used for SQL statement
   feederField = arcpy.AddFieldDelimiters(dataPath,"FEEDERID")
   trsField = arcpy.AddFieldDelimiters(dataPath,"TRS")
