@@ -24,6 +24,7 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
   #R&B = r'Devices\Primary Devices\Regulators & Boosters'
   ############################
   
+  
   #variables used for SQL statement
   feederField = arcpy.AddFieldDelimiters(dataPath,"FEEDERID")
   trsField = arcpy.AddFieldDelimiters(dataPath,"TRS")
@@ -75,16 +76,23 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       #find section name value for trsLyr using a Search Cursor
       cursor = arcpy.da.SearchCursor(trsLyr, ["SECTIONNAME"])
       for row in cursor:
-        sectionName = row[0]
+        sectionName = str(row[0])
       del cursor
       
       #data check
       print ("Section Name: {0}".format(sectionName))
+      print type(sectionName)
       
       #select by location
       mySelection2 = arcpy.SelectLayerByLocation_management(dataPathLyr,"COMPLETELY_WITHIN",trsLyr,"","NEW_SELECTION")
       
-      ####Use GetCount / IF/ELSE statement to bypass empty selection???####
+      '''
+      I am having some trouble right here... 
+      The code below updates a layer file and not a FC so it does nothing for me...
+      Should I loop through the selected objects, append the objIDs to a list,
+      then loop through the list you just created and create a cursor object 
+      on the actual FC that only updates the object IDs in the list.....
+      '''
       
       #loop through mySelection and update with sectionName variable value
       cursor = arcpy.da.UpdateCursor(mySelection2, ["TRS"])
