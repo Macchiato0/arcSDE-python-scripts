@@ -31,6 +31,9 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
   #Town Range Section feature class
   TRS = r'E:\Data\EROlson\test.gdb\TownRangeSection'
   
+  #Town Range Section Feature Layer
+  myTrsLyr = arcpy.MakeFeatureLayer_management(TRS, 'trsOutput_lyr')
+  
   for feeder in feederID:
     #create SQL clause for feature layer selection
     SQL = """{0} = '{1}' AND {2} IS NULL""".format(feederField,feeder,trsField)
@@ -39,7 +42,7 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
     dataPathLyr = arcpy.MakeFeatureLayer_management(dataPath, 'output_lyr', SQL)
 
     #select by location - select TRS polygons that contain objects from dataPathLyr 
-    mySelection = arcpy.SelectLayerByLocation_management(TRS,"CONTAINS",dataPathLyr,"","NEW_SELECTION")
+    mySelection = arcpy.SelectLayerByLocation_management(myTrsLyr,"CONTAINS",dataPathLyr,"","NEW_SELECTION")
     
     #list of TRS polygon object IDs that contain features in the dataPathLyr
     trsList = []
@@ -48,8 +51,11 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
     cursor = arcpy.da.SearchCursor(mySelection, ["OBJECTID"])
     
     for row in cursor:
-      trsList.append(row) #or is it row[0]???
+      trsList.append(row[0]) 
     del cursor
+    
+    #data check
+    print ("TRS OBJID List: {}".format(trsList)) 
     
     ####Now another Select By Location of dataPath FC to individual TRS polygons####
     #variable for SQL statement
@@ -57,9 +63,13 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
     
     # i is an objectID for a specific polygon in the TRS FC
     for i in trsList:
+      
+      #data check
+      print ("TRS Polygon OBJID: {0}".format(i))
+      
       SQL = """{0} = {1}""".format(objIDField, i)
       
-      #create layer w/specific object ID from TRS FC to clip from
+      #create layer w/specific object ID from TRS FC to conduct select by location from
       trsLyr = arcpy.MakeFeatureLayer_management(TRS, 'trs_lyr', SQL)
       
       #find section name value for trsLyr using a Search Cursor
@@ -68,18 +78,19 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
         sectionName = row[0]
       del cursor
       
+      #data check
+      print ("Section Name: {0}".format(sectionName))
+      
       #select by location
-      mySelection = arcpy.SelectLayerByLocation_management(dataPathLyr,"COMPLETELY_WITHIN",trsLyr,"","NEW_SELECTION")
+      mySelection2 = arcpy.SelectLayerByLocation_management(dataPathLyr,"COMPLETELY_WITHIN",trsLyr,"","NEW_SELECTION")
       
-      #dictionary to store TRS ["SECTIONNAME"] value as key and all selected object IDs from dataPathLyr as values
-      myDict = {} #myDict{key:[value1,value2,value3]}
+      ####Use GetCount / IF/ELSE statement to bypass empty selection???####
       
-      #loop through mySelection and assign all selected object IDs as a value to TRS ["SECTIONNAME"] key
-      cursor = arcpy.da.SearchCursor(mySelection, ["OBJECTID"])
+      #loop through mySelection and update with sectionName variable value
+      cursor = arcpy.da.UpdateCursor(mySelection2, ["TRS"])
       for row in cursor:
-        myDict
+        #data check
+        print ("Update Cursor row: ".format(row[0]))
+        row[0]= sectionName
       del cursor
-      
-      
-    
-    
+   
