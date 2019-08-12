@@ -38,7 +38,7 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
     #create layer from input datapath to select from
     dataPathLyr = arcpy.MakeFeatureLayer_management(dataPath, 'output_lyr', SQL)
 
-    #select by location
+    #select by location - select TRS polygons that contain objects from dataPathLyr 
     mySelection = arcpy.SelectLayerByLocation_management(TRS,"CONTAINS",dataPathLyr,"","NEW_SELECTION")
     
     #list of TRS polygon object IDs that contain features in the dataPathLyr
@@ -48,13 +48,14 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
     cursor = arcpy.da.SearchCursor(mySelection, ["OBJECTID"])
     
     for row in cursor:
-      trsList.append(row)
+      trsList.append(row) #or is it row[0]???
     del cursor
     
     ####Now another Select By Location of dataPath FC to individual TRS polygons####
     #variable for SQL statement
     objIDField = arcpy.AddFieldDelimiters(TRS,"OBJECTID")
-
+    
+    # i is an objectID for a specific polygon in the TRS FC
     for i in trsList:
       SQL = """{0} = {1}""".format(objIDField, i)
       
