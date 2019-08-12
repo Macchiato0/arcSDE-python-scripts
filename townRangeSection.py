@@ -93,12 +93,18 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       then loop through the list you just created and create a cursor object 
       on the actual FC that only updates the object IDs in the list.....
       '''
+      #dataPath OBJID's List
+      dataUpdateList = []
       
-      #loop through mySelection and update with sectionName variable value
-      cursor = arcpy.da.UpdateCursor(mySelection2, ["TRS"])
+      #loop through mySelection2 and append object IDs to list
+      cursor = arcpy.da.SearchCursor(mySelection2, ["OBJECTID"])
       for row in cursor:
-        #data check
-        print ("Update Cursor row: ".format(row[0]))
-        row[0]= sectionName
+        dataUpdateList.append(row[0])
       del cursor
+      
+      #loop through dataUpdateList and update rows with correct TRS section name 
+      for i in dataUpdateList:
+        cursor = arcpy.da.UpdateCursor(dataPath, ["TRS"], """OBJECTID ={0}""".format(i))
+        for row in cursor:
+          row[0] = sectionName
    
