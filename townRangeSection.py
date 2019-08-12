@@ -102,8 +102,13 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
         dataUpdateList.append(row[0])
       del cursor
       
+      #data check
+      print dataUpdateList
+      
       #loop through dataUpdateList and update rows with correct TRS section name 
       for i in dataUpdateList:
+        #data check
+        print sectionName
         cursor = arcpy.da.UpdateCursor(dataPath, ["TRS"], """OBJECTID ={0}""".format(i))
         for row in cursor:
           row[0] = sectionName
