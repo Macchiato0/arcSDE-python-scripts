@@ -37,12 +37,14 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
   
   for feeder in feederID:
     #create SQL clause for feature layer selection
+    #FEEDERID = feeder AND TRS IS NULL
     SQL = """{0} = '{1}' AND {2} IS NULL""".format(feederField,feeder,trsField)
 
     #create layer from input datapath to select from
     dataPathLyr = arcpy.MakeFeatureLayer_management(dataPath, 'output_lyr', SQL)
 
     #select by location - select TRS polygons that contain objects from dataPathLyr 
+    #!change mySelection variable to trsPolygonSelect???
     mySelection = arcpy.SelectLayerByLocation_management(myTrsLyr,"CONTAINS",dataPathLyr,"","NEW_SELECTION")
     
     #list of TRS polygon object IDs that contain features in the dataPathLyr
@@ -93,7 +95,7 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       then loop through the list you just created and create a cursor object 
       on the actual FC that only updates the object IDs in the list.....
       '''
-      #dataPath OBJID's List
+      #dataPathLyr OBJID's List
       dataUpdateList = []
       
       #loop through mySelection2 and append object IDs to list
@@ -103,13 +105,13 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       del cursor
       
       #data check
-      print dataUpdateList
+      print ("Data Update List {0}".format(dataUpdateList))
       
       #loop through dataUpdateList and update rows with correct TRS section name 
-      for i in dataUpdateList:
+      for data in dataUpdateList:
         #data check
         print sectionName
-        cursor = arcpy.da.UpdateCursor(dataPath, ["TRS"], """OBJECTID ={0}""".format(i))
+        cursor = arcpy.da.UpdateCursor(dataPath, ["TRS"], """OBJECTID ={0}""".format(data))
         for row in cursor:
           row[0] = sectionName
    
