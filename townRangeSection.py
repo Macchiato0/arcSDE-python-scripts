@@ -107,6 +107,19 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       #data check
       print ("Data Update List {0}".format(dataUpdateList))
       
+      #set workspace
+      workspace = r'E:\Data\EROlson\test.gdb'
+        
+      # Start an edit session. Must provide the worksapce.
+      edit = arcpy.da.Editor(workspace)
+
+      # Edit session is started without an undo/redo stack for versioned data
+      #  (for second argument, use False for unversioned data)
+      edit.startEditing(False, False)
+
+      # Start an edit operation
+      edit.startOperation()
+      
       #loop through dataUpdateList and update rows with correct TRS section name 
       for data in dataUpdateList:
         #data check
@@ -114,4 +127,11 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
         cursor = arcpy.da.UpdateCursor(dataPath, ["TRS"], """OBJECTID ={0}""".format(data))
         for row in cursor:
           row[0] = sectionName
-   
+        del cursor
+        
+      # Stop the edit operation.
+      edit.stopOperation()
+
+      # Stop the edit session and save the changes
+      edit.stopEditing(True)
+
