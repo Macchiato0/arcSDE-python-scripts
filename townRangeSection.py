@@ -88,13 +88,6 @@ def findTRS(feederID,dataPath): #instead of this user should input list of feede
       #select by location
       mySelection2 = arcpy.SelectLayerByLocation_management(dataPathLyr,"COMPLETELY_WITHIN",trsLyr,"","NEW_SELECTION")
       
-      '''
-      I am having some trouble right here... 
-      The code below updates a layer file and not a FC so it does nothing for me...
-      Should I loop through the selected objects, append the objIDs to a list,
-      then loop through the list you just created and create a cursor object 
-      on the actual FC that only updates the object IDs in the list.....
-      '''
       #dataPathLyr OBJID's List
       dataUpdateList = []
       
